@@ -29,13 +29,16 @@ String getContentType(String extension) {
 Map<String, dynamic> _queryExtensions() {
   Map<String, dynamic> extensions = Map<String, dynamic>();
 
-  _extensions.forEach((dynamic type, dynamic typeInfo) {
-    if (typeInfo.containsKey('extensions')) {
-      for (String ext in typeInfo['extensions']) {
-        extensions[ext] = type;
+  if (extensions == null) {
+    extensions = <String, dynamic>{};
+    _extensions.forEach((dynamic type, dynamic typeInfo) {
+      if (typeInfo.containsKey('extensions')) {
+        for (String ext in typeInfo['extensions']) {
+          _extensions[ext] = type;
+        }
       }
-    }
-  });
+    });
+  }
 
   return extensions;
 }
